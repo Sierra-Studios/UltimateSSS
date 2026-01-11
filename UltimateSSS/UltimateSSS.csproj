@@ -67,7 +67,6 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Config.cs" />
         <Compile Include="EntryPoint.cs" />
         <Compile Include="Patches\PreAuthFix.cs" />
         <Compile Include="Patches\SendAllResync.cs" />

@@ -1,4 +1,4 @@
-﻿using LabApi.Features.Wrappers;
+﻿/*using LabApi.Features.Wrappers;
 using UltimateSSS.SSS.Interfaces;
 using UltimateSSS.SSS.Settings.StaticSetting;
 using UserSettings.ServerSpecific;
@@ -16,4 +16,4 @@ public class EvilButton : StaticButton
         player.SendBroadcast("You sent button", 3);
         base.OnAction(player, ssButton);
     }
-}
+}*/

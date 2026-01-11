@@ -11,6 +11,7 @@ public abstract class PlayerHeader : PlayerSetting<SSGroupHeader>, IHeader
     [OptionalSetting] public virtual bool ReducedPadding(Player player) => false;
     [OptionalSetting] public virtual List<IDynamicSetting> PreDynamicSettings { get; set; } = new();
     [OptionalSetting] public virtual bool IsAlone { get; set; } = false;
+    [OptionalSetting] public int Order { get; set; } = 0;
     [OptionalSetting] public List<IDynamicSetting> AfterDynamicSettings { get; set; } = new();
     
     [OptionalSetting] public virtual List<IDynamicSetting> AfterDynamic(Player player) => new();

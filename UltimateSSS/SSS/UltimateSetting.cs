@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using LabApi.Features.Console;
 using LabApi.Features.Enums;
@@ -168,8 +169,6 @@ public abstract class UltimateSetting : IGenericSetting
 
         SettingHolder.Clean(player);
         
-        Cleaner[player, new List<ServerSpecificSettingBase>()].Clear();
-        
         foreach (var setting in Prepare(player))
         {
             if (setting == null)
@@ -203,7 +202,7 @@ public abstract class UltimateSetting : IGenericSetting
             }
         }
 
-        foreach (var dict in dictionary)
+        foreach (var dict in dictionary.OrderBy(x => x.Key.Order))
         {
             dict.Key.AddYourselfInit(player, result);
             

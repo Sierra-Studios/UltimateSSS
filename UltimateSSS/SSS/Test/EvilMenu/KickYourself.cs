@@ -1,4 +1,4 @@
-﻿using LabApi.Features.Wrappers;
+﻿/*using LabApi.Features.Wrappers;
 using UltimateSSS.SSS.Interfaces;
 using UltimateSSS.SSS.Settings.PlayerSetting;
 using UserSettings.ServerSpecific;
@@ -23,4 +23,4 @@ public class KickYourself : PlayerButton
         player.Kick("Idiot");
         base.OnAction(player, ssButton);
     }
-}
+}*/

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using LabApi.Features.Wrappers;
 using Mirror;
 using UltimateSSS.SSS.Interfaces;
@@ -33,4 +33,4 @@ public class KickMenuHeader : PlayerHeader
 
         return settings;
     }
-}
+}*/
