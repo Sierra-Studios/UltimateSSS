@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{104F20F7-5AC9-47AE-9F78-D3909195BD77}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>UltimateSSS</RootNamespace>
+        <AssemblyName>UltimateSSS</AssemblyName>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>embedded</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\Lib.Harmony.2.4.2\lib\net48\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="LabApi, Version=1.1.4.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\Northwood.LabAPI.1.1.4\lib\net48\LabApi.dll</HintPath>
+        </Reference>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+        <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+          <HintPath>..\packages\YamlDotNet.11.0.1\lib\net45\YamlDotNet.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp">
+          <HintPath>$(LTSL_REFS)\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="Mirror">
+          <HintPath>$(LTSL_REFS)\Mirror.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+          <HintPath>$(LTSL_REFS)\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="CommandSystem.Core">
+          <HintPath>$(LTSL_REFS)\CommandSystem.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp-firstpass">
+          <HintPath>$(LTSL_REFS)\Assembly-CSharp-firstpass.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.TextMeshPro">
+          <HintPath>$(LTSL_REFS)\Unity.TextMeshPro.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Config.cs" />
+        <Compile Include="EntryPoint.cs" />
+        <Compile Include="Patches\PreAuthFix.cs" />
+        <Compile Include="Patches\SendAllResync.cs" />
+        <Compile Include="Patches\SendTo.cs" />
+        <Compile Include="Patches\SettingsOriginalDefinitionFix.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="SSS\Attributes\OptionalSetting.cs" />
+        <Compile Include="SSS\Attributes\RequiredSetting.cs" />
+        <Compile Include="SSS\Interfaces\IDynamicallyFuckOff.cs" />
+        <Compile Include="SSS\Interfaces\IDynamicSetting.cs" />
+        <Compile Include="SSS\Interfaces\IHeader.cs" />
+        <Compile Include="SSS\Interfaces\IGenericSetting.cs" />
+        <Compile Include="SSS\SettingHolder.cs" />
+        <Compile Include="SSS\Settings\DynamicSetting\DynamicButton.cs" />
+        <Compile Include="SSS\Settings\DynamicSetting\DynamicDropdown.cs" />
+        <Compile Include="SSS\Settings\DynamicSetting\DynamicHeader.cs" />
+        <Compile Include="SSS\Settings\DynamicSetting\DynamicKeybind.cs" />
+        <Compile Include="SSS\Settings\DynamicSetting\DynamicPlainText.cs" />
+        <Compile Include="SSS\Settings\DynamicSetting\DynamicSetting.cs" />
+        <Compile Include="SSS\Settings\DynamicSetting\DynamicSlider.cs" />
+        <Compile Include="SSS\Settings\DynamicSetting\DynamicTextArea.cs" />
+        <Compile Include="SSS\Settings\DynamicSetting\DynamicTwoButton.cs" />
+        <Compile Include="SSS\Settings\PlayerSetting\PlayerButton.cs" />
+        <Compile Include="SSS\Settings\PlayerSetting\PlayerDropdown.cs" />
+        <Compile Include="SSS\Settings\PlayerSetting\PlayerHeader.cs" />
+        <Compile Include="SSS\Settings\PlayerSetting\PlayerKeybind.cs" />
+        <Compile Include="SSS\Settings\PlayerSetting\PlayerPlainText.cs" />
+        <Compile Include="SSS\Settings\PlayerSetting\PlayerSetting.cs" />
+        <Compile Include="SSS\Settings\PlayerSetting\PlayerSlider.cs" />
+        <Compile Include="SSS\Settings\PlayerSetting\PlayerTextArea.cs" />
+        <Compile Include="SSS\Settings\PlayerSetting\PlayerTwoButton.cs" />
+        <Compile Include="SSS\Settings\SettingFinalMerger.cs" />
+        <Compile Include="SSS\Settings\SettingMerger.cs" />
+        <Compile Include="SSS\Settings\StaticSetting\StaticButton.cs" />
+        <Compile Include="SSS\Settings\StaticSetting\StaticDropdown.cs" />
+        <Compile Include="SSS\Settings\StaticSetting\StaticHeader.cs" />
+        <Compile Include="SSS\Settings\StaticSetting\StaticKeybind.cs" />
+        <Compile Include="SSS\Settings\StaticSetting\StaticSetting.cs" />
+        <Compile Include="SSS\Settings\StaticSetting\StaticSlider.cs" />
+        <Compile Include="SSS\Settings\StaticSetting\StaticPlainText.cs" />
+        <Compile Include="SSS\Settings\StaticSetting\StaticTextArea.cs" />
+        <Compile Include="SSS\Settings\StaticSetting\StaticTwoButton.cs" />
+        <Compile Include="SSS\UltimateSetting.cs" />
+        <Compile Include="SSS\Test\EvilMenu\EvilButton.cs" />
+        <Compile Include="SSS\Test\EvilMenu\EvilMenuHeader.cs" />
+        <Compile Include="SSS\Test\EvilMenu\KickYourself.cs" />
+        <Compile Include="SSS\Test\KickMenu\KickMenuHeader.cs" />
+        <Compile Include="Utils\EvilDictionary.cs" />
+        <Compile Include="Utils\TwoList.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
