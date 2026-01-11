@@ -9,6 +9,7 @@ There is no loop that would go and update it every X seconds, you as the develop
 
 ### Plugin compability
 This plugin *should* not rewrite SSS already created, it was tested to work with ASS (it's firstly rewritten and after executing update adds itself on top of it).
+- Update is done by: `UltimateSSS.Update(Player player)` or `UltimateSSS.Update(Player player, float delayInSeconds)`
 
 # Credits
 @Someone-193 https://github.com/Someone-193/ASS [MIT]
