@@ -12,16 +12,19 @@ public class DynamicHeader : DynamicSetting<SSGroupHeader>, IHeader
     [OptionalSetting] public bool ReducedPadding { get; set; } = false;
     [OptionalSetting] public List<IDynamicSetting> PreDynamicSettings { get; } = new();
     [OptionalSetting] public bool IsAlone { get; set; } = false;
-    [OptionalSetting] public int Order { get; set; } = 0;
+    [OptionalSetting] public int HeaderOrder { get; set; } = 0;
     [OptionalSetting] public List<IDynamicSetting> AfterDynamicSettings() => new();
 
-    public DynamicHeader(string label, int? id = null, bool reducedPadding = false, Action action = null, bool isAlone = false, List<IDynamicSetting> preDynamicSettings = null)
+    public sealed override int Order { get; set; } = 0;
+    
+    public DynamicHeader(string label, int? id = null, bool reducedPadding = false, Action action = null, bool isAlone = false, List<IDynamicSetting> preDynamicSettings = null, int order = 0)
     {
         Label = label;
         Id = id;
         ReducedPadding = reducedPadding;
         Action = action;
         IsAlone = isAlone;
+        Order = order;
         if(preDynamicSettings != null)
             PreDynamicSettings = preDynamicSettings;
     }

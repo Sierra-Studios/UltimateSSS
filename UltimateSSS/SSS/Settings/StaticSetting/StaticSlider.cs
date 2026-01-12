@@ -1,5 +1,6 @@
 ﻿using LabApi.Features.Wrappers;
 using UltimateSSS.SSS.Attributes;
+using UltimateSSS.SSS.Interfaces;
 using UserSettings.ServerSpecific;
 
 namespace UltimateSSS.SSS.Settings.StaticSetting;

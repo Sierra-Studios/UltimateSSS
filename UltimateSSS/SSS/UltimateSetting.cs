@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using InventorySystem.Items.Usables.Scp330;
 using LabApi.Features.Console;
 using LabApi.Features.Enums;
 using LabApi.Features.Wrappers;
 using MEC;
 using UltimateSSS.SSS.Interfaces;
+using UltimateSSS.SSS.Settings;
 using UltimateSSS.Utils;
 using UserSettings.ServerSpecific;
 
@@ -43,7 +45,8 @@ public abstract class UltimateSetting : IGenericSetting
             {
                 try
                 {
-                    SettingHolder.Get(arg2.OriginalDefinition).PreAction(player, arg2);
+                    var setting = SettingHolder.Get(arg2.OriginalDefinition);
+                    setting.PreAction(player, arg2);
                 }
                 catch (Exception e)
                 {
@@ -92,8 +95,14 @@ public abstract class UltimateSetting : IGenericSetting
                 continue;
             }
 
+            if (typeof(IDebugSetting).IsAssignableFrom(type) && !EntryPoint.Instance.Config.Debug)
+            {
+                continue;
+            }
+
             try
             {
+                MyLogger.Debug($"Adding {type.Name}");
                 Settings.Add((UltimateSetting)Activator.CreateInstance(type));
             }
             catch (Exception e)
@@ -141,7 +150,7 @@ public abstract class UltimateSetting : IGenericSetting
     public static void ResyncServer()
     {
         // only update to real players that are authenticated
-        foreach (var player in Player.GetAll(PlayerSearchFlags.AuthenticatedPlayers))
+        foreach (var player in Player.ReadyList)
             Update(player);
     }
 
@@ -156,12 +165,21 @@ public abstract class UltimateSetting : IGenericSetting
         Timing.CallDelayed(Timing.WaitForSeconds(after), () => Update(player));
     }
     
-    public static ServerSpecificSettingBase[] Update(Player player)
+    public static void Update(Player player)
     {
         if (player == null)
         {
-            return Array.Empty<ServerSpecificSettingBase>();
+            MyLogger.Debug("Bro was null");
+            return;
         }
+
+        if (!player.IsReady)
+        {
+            MyLogger.Debug("Bro is not ready though");
+            return;
+        }
+        
+        MyLogger.Debug($"Updating {player.Nickname}");
         
         List<ServerSpecificSettingBase> result = new List<ServerSpecificSettingBase>();
         EvilDictionary<IHeader, List<UltimateSetting>> dictionary = new EvilDictionary<IHeader, List<UltimateSetting>>();
@@ -184,13 +202,13 @@ public abstract class UltimateSetting : IGenericSetting
                 continue;
             }
             
-            if (names.TryGetValue(nameof(setting.Header), out header))
+            if (names.TryGetValue(setting.Header.GetType().Name, out header))
             {
                 dictionary[header, new List<UltimateSetting>()].Add(setting);
                 continue;
             }
 
-            names[nameof(setting.Header)] = setting.Header;
+            names[setting.Header.GetType().Name] = setting.Header;
             var value = dictionary[setting.Header, new List<UltimateSetting>()];
             if (value == null)
             {
@@ -202,11 +220,11 @@ public abstract class UltimateSetting : IGenericSetting
             }
         }
 
-        foreach (var dict in dictionary.OrderBy(x => x.Key.Order))
+        foreach (var dict in dictionary.OrderBy(x => x.Key.HeaderOrder))
         {
             dict.Key.AddYourselfInit(player, result);
             
-            foreach (var li in dict.Value)
+            foreach (var li in dict.Value.OrderBy(x => x is not SettingMerger merger ? 0 : merger.Order))
             {
                 li.AddWhen(player, result);
             }
@@ -220,8 +238,9 @@ public abstract class UltimateSetting : IGenericSetting
         }
 
         var collection = result.ToArray();
+        
+        MyLogger.Debug($"Sending to {player.Nickname}");
         ServerSpecificSettingsSync.SendToPlayer(player.ReferenceHub, collection);
-        return collection;
     }
 
 

@@ -11,7 +11,7 @@ public interface IHeader
     
     public bool IsAlone { get; set; }
     
-    [OptionalSetting] public int Order { get; set; }
+    [OptionalSetting] public int HeaderOrder { get; set; }
 
     public void AddYourselfInit(Player player, List<ServerSpecificSettingBase> settings);
 }

@@ -10,7 +10,7 @@ public abstract class StaticSetting<T> : SettingFinalMerger<T> where T : ServerS
     [RequiredSetting] public abstract string Label { get; set; }
     [OptionalSetting] public virtual int? Id { get; set; } = null;
     [OptionalSetting] public virtual string Hint { get; set; } = null;
-    [OptionalSetting] public virtual void OnAction(Player player, T ssButton) { }
+    [OptionalSetting] public virtual void OnAction(Player player, T converted) { }
     
     public sealed override void AddWhen(Player player, List<ServerSpecificSettingBase> settings)
     {

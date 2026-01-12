@@ -11,12 +11,13 @@ public abstract class StaticHeader : StaticSetting<SSGroupHeader>, IHeader
     [OptionalSetting] public virtual bool ReducedPadding { get; set; } = false;
     [OptionalSetting] public virtual List<IDynamicSetting> PreDynamicSettings { get; } = new();
     [OptionalSetting] public virtual bool IsAlone { get; set; } = false;
-    [OptionalSetting] public int Order { get; set; } = 0;
+    [OptionalSetting] public virtual int HeaderOrder { get; set; } = 0;
     [OptionalSetting] public virtual List<IDynamicSetting> AfterDynamicSettings() => new();
     
     public sealed override IHeader Header { get; set; } = null;
+    public sealed override int Order { get; set; } = 0;
     public sealed override void PreAction(Player player, ServerSpecificSettingBase theBase) {}
-    public sealed override void OnAction(Player player, SSGroupHeader ssButton) {}
+    public sealed override void OnAction(Player player, SSGroupHeader converted) {}
     
     public void AddYourselfInit(Player player, List<ServerSpecificSettingBase> settings)
     {

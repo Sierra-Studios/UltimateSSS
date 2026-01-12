@@ -14,8 +14,23 @@ public abstract class PlayerKeybind : PlayerSetting<SSKeybindSetting>
     
     public sealed override void PreAction(Player player, ServerSpecificSettingBase theBase)
     {
-        OnAction(player, (SSKeybindSetting)theBase);
+        var based = (SSKeybindSetting)theBase;
+
+        if (!based.SyncIsPressed)
+        {
+            OnRelease(player, based);
+        }
+        else
+        {
+            OnPressed(player, based);
+        }
+        
+        OnAction(player, based);
     }
+
+    public virtual void OnRelease(Player player, SSKeybindSetting keybindSetting) { }
+    
+    public virtual void OnPressed(Player player, SSKeybindSetting keybindSetting) { }
 
     public sealed override SSKeybindSetting ConvertToBase(Player player)
     {

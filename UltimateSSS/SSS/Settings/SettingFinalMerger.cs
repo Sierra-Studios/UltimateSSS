@@ -15,7 +15,7 @@ public abstract class SettingFinalMerger<T> : SettingMerger where T : ServerSpec
             _base = value;
         } 
     }
-
+    
     public sealed override ServerSpecificSettingBase PreBase
     {
         get => _base;
