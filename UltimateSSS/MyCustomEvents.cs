@@ -14,5 +14,6 @@ public class MyCustomEvents : CustomEventsHandler
         MyLogger.Debug("Bro joined");
         Timing.CallDelayed(2f, () => UltimateSetting.Update(ev.Player));
         base.OnPlayerJoined(ev);
+        //Test
     }
 }
